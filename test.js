@@ -16,9 +16,13 @@ function debug_separator() {
     debug('ServiceWorker NOT found in navigator');
   }
 
+  navigator.serviceWorker.addEventListener('controllerchange', function(e){
+    debug("controllerChange event");
+  });
+
   // Check ServiceWorkerContainer
-  var register_btn = document.querySelector('#check_container_btn');
-  register_btn.addEventListener('click', function(e) {
+  var controller_btn = document.querySelector('#check_container_btn');
+  controller_btn.addEventListener('click', function(e) {
     debug_separator();
     var worker = navigator.serviceWorker.controller;
     debug('ServiceWorker (controller): ' + worker);
@@ -40,10 +44,21 @@ function debug_separator() {
     debug_separator();
     navigator.serviceWorker.register('service-worker.js', {scope: './'}).then(function(registration) {
       debug('Service-worker register success');
+
+      registration.addEventListener('updatefound', function(e) {
+        debug("Received onupdatefound");
+      });
+
       var serviceWorker;
       if (registration.installing) {
         serviceWorker = registration.installing;
-        debug('registration -> installing');
+        debug('Worker state ' + registration.installing.state);
+        serviceWorker.onstatechange = function(evt) {
+          debug('Worker state ' + serviceWorker.state + '\n');
+          debug('wait: ' + registration.wait);
+          debug('active: ' + registration.active);
+        };
+
       } else if (registration.waiting) {
         serviceWorker = registration.waiting;
         debug('registration -> waitting');
@@ -51,6 +66,7 @@ function debug_separator() {
         serviceWorker = registration.active;
         debug('registration -> active');
       }
+
     }).catch(function(error) {
       debug('Error during registration: ' + error);
     });
@@ -95,8 +111,9 @@ function debug_separator() {
     var clientUrl = document.querySelector('#clientURL');
     debug_separator();
     navigator.serviceWorker.getRegistration(clientUrl).then(function(registration) {
-      registration.unregister();
-      debug('Unregister done');
+      registration.unregister().then(function(result) {
+        debug('Unregister done -> ' + result);
+      });
     });
   });
 
@@ -106,8 +123,9 @@ function debug_separator() {
     debug_separator();
     navigator.serviceWorker.getRegistrations().then(function(registrations) {
       registrations.forEach(function (registration) {
-        registration.unregister();
-        debug('Unregister done');
+        registration.unregister().then(function(result) {
+          debug('Unregister done -> ' + result);
+        });
       });
     });
   });
