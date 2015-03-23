@@ -129,4 +129,18 @@ function debug_separator() {
       });
     });
   });
+
+  // Open window action
+  var open_window_btn = document.querySelector('#open_window_btn');
+  open_window_btn.addEventListener('click', function(e) {
+    debug_separator();
+    debug('Send open_window message to worker');
+    navigator.serviceWorker.controller.postMessage('openWindow');
+  });
+
+ Notification.requestPermission(function() {
+    if (!navigator.serviceWorker.controller)
+      alert('Please reload');
+  });
+
 }());
