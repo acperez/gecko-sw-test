@@ -1,12 +1,12 @@
 'use strict';
 
 function debug(str) {
-  console.log(' -*- ServiceWorkers -*-: ' + str + '\n');
+  dump(' -*- ServiceWorkers -*-: ' + str + '\n');
 }
 
 function debug_separator() {
   debug('');
-  console.log(' -*- ServiceWorkers -*-: ----------------------------\n');
+  dump(' -*- ServiceWorkers -*-: ----------------------------\n');
 }
 
 (function() {
