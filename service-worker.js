@@ -1,7 +1,7 @@
 'use strict';
 
 function debug(str) {
-  dump(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
+  console.log(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
 }
 
 self.addEventListener('install', function(e) {
