@@ -1,12 +1,12 @@
 'use strict';
 
 function debug(str) {
-  console.log(' -*- ServiceWorkers -*-: ' + str + '\n');
+  dump(' -*- ServiceWorkers -*-: ' + str + '\n');
 }
 
 function debug_separator() {
   debug('');
-  console.log(' -*- ServiceWorkers -*-: ----------------------------\n');
+  dump(' -*- ServiceWorkers -*-: ----------------------------\n');
 }
 
 (function() {
@@ -138,9 +138,34 @@ function debug_separator() {
     navigator.serviceWorker.controller.postMessage('openWindow');
   });
 
- Notification.requestPermission(function() {
+/* Notification.requestPermission(function() {
     if (!navigator.serviceWorker.controller)
       alert('Please reload');
+  });*/
+
+  // Update action
+  var update_btn = document.querySelector('#update_btn');
+  update_btn.addEventListener('click', function(e) {
+    debug_separator();
+    debug('Update worker');
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      debug(registrations.length + ' registration/s found');
+      registrations.forEach(function (registration) {
+        registration.update();
+      });
+    });
   });
+
+  // Open window action
+  var client_btn = document.querySelector('#client_btn');
+  client_btn.addEventListener('click', function(e) {
+    debug_separator();
+    debug('Send client message to worker');
+    navigator.serviceWorker.controller.postMessage('client');
+  });
+
+  navigator.serviceWorker.onmessage = function(msg) {
+    debug('Message received from worker: ' + msg.data);
+  };
 
 }());
