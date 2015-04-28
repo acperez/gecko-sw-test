@@ -1,7 +1,7 @@
 'use strict';
 
 function debug(str) {
-  dump(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
+  console.log(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
 }
 
 self.addEventListener('install', function(e) {
@@ -102,7 +102,7 @@ function testClient() {
 }
 
 self.onmessage = function(e) {
-  debug('Message received 10 testing : ' + e.data);
+  debug('Message received updates kk : ' + e.data);
   switch (e.data) {
     case 'openWindow':
       testOpenWindow();
