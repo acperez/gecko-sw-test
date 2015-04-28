@@ -102,7 +102,7 @@ function testClient() {
 }
 
 self.onmessage = function(e) {
-  debug('Message received updates kk : ' + e.data);
+  debug('Message received hello update! : ' + e.data);
   switch (e.data) {
     case 'openWindow':
       testOpenWindow();
