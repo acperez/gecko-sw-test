@@ -6,6 +6,7 @@ function debug(str) {
 
 self.addEventListener('install', function(e) {
   debug('Install event');
+  debug('Install version 1');
 });
 
 self.addEventListener('activate', function(e) {
@@ -42,7 +43,7 @@ self.addEventListener('fetch', function(e) {
 
 function testOpenWindow() {
 //  clients.openWindow('about:blank').then(function(result) {
-  clients.openWindow('/open_window.htmll').then(function(result) {
+  clients.openWindow('/open_window.html').then(function(result) {
 //  clients.openWindow('http://www.google.com').then(function(result) {
     debug("testOpenWindow: " + result);
     for (var a in result) {
@@ -54,32 +55,6 @@ function testOpenWindow() {
     debug('Error during openWindow: ' + error);
   });
 }
-
-/*
-function getNotificationClickAndExecute(callback) {
-  var callback_wrapper = function(e) {
-    self.removeEventListener('notificationclick', callback_wrapper);
-    e.notification.close();
-    callback(e);
-  }
-  self.addEventListener('notificationclick', callback_wrapper);
-
-  self.registration.showNotification('test');
-}
-
-function testOpenWindow() {
-  getNotificationClickAndExecute(function(e) {
-    // This is using waitUntil() to work around a bug that has a fix
-    // waiting for review in https://codereview.chromium.org/896043004
-    e.waitUntil(clients.getAll().then(function() {
-      clients.openWindow('http://www.google.com')
-      .then(function(result) {
-        console.log(result);
-      });
-    }));
-  });
-}
-*/
 
 function testClient() {
   debug(cli);
@@ -102,7 +77,7 @@ function testClient() {
 }
 
 self.onmessage = function(e) {
-  debug('Message received hello update! : ' + e.data);
+  debug('Message received 1: ' + e.data);
   switch (e.data) {
     case 'openWindow':
       testOpenWindow();
