@@ -6,7 +6,7 @@ function debug(str) {
 
 self.addEventListener('install', function(e) {
   debug('Install event');
-  debug('Install version 6');
+  debug('Install version 7');
 });
 
 self.addEventListener('activate', function(e) {
@@ -77,7 +77,7 @@ function testClient() {
 }
 
 self.onmessage = function(e) {
-  debug('Message received 6: ' + e.data);
+  debug('Message received 7: ' + e.data);
   switch (e.data) {
     case 'openWindow':
       testOpenWindow();
