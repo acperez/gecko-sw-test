@@ -1,12 +1,25 @@
 'use strict';
 
 function debug(str) {
+  dump(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
   console.log(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
 }
 
 self.addEventListener('install', function(e) {
   debug('Install event');
   debug('Install version 8');
+
+  clients.matchAll().then(function (clients) {
+    debug('Clients found: ' + clients.length);
+    for (var i = 0; i < clients.length; i++) {
+      debug("Client Id: " + clients[i].id);
+      debug("Client url: " + clients[i].url);
+      debug("Client frameType: " + clients[i].frameType);
+    }
+  }).catch(function (error) {
+    debug('Error calling matchAll');
+  });
+
 });
 
 self.addEventListener('activate', function(e) {

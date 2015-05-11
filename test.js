@@ -2,11 +2,13 @@
 
 function debug(str) {
   dump(' -*- ServiceWorkers -*-: ' + str + '\n');
+  console.log(' -*- ServiceWorkers -*-: ' + str + '\n');
 }
 
 function debug_separator() {
   debug('');
   dump(' -*- ServiceWorkers -*-: ----------------------------\n');
+  console.log(' -*- ServiceWorkers -*-: ----------------------------\n');
 }
 
 (function() {
