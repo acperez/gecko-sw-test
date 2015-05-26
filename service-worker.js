@@ -7,19 +7,7 @@ function debug(str) {
 
 self.addEventListener('install', function(e) {
   debug('Install event');
-  debug('Install version 8');
-
-  clients.matchAll().then(function (clients) {
-    debug('Clients found: ' + clients.length);
-    for (var i = 0; i < clients.length; i++) {
-      debug("Client Id: " + clients[i].id);
-      debug("Client url: " + clients[i].url);
-      debug("Client frameType: " + clients[i].frameType);
-    }
-  }).catch(function (error) {
-    debug('Error calling matchAll');
-  });
-
+  debug('Install version 9');
 });
 
 self.addEventListener('activate', function(e) {
@@ -38,19 +26,6 @@ self.addEventListener('fetch', function(e) {
     debug('algo2: ' + algo2);
   }).catch(function(error) {
     debug('Error calling claim: ' + error);
-  });
-
-  clients.matchAll().then(function (clients) {
-    debug('Clients found: ' + clients.length);
-    for (var i = 0; i < clients.length; i++) {
-      debug("Client Id: " + clients[i].id);
-      debug("Client url: " + clients[i].url);
-      debug("Client frameType: " + clients[i].frameType);
-      debug("Client postmessafe: " + clients[i].postMessage);
-      client[i].postMessage('hola');
-    }
-  }).catch(function (error) {
-    debug('Error calling matchAll');
   });
 });
 
@@ -89,14 +64,30 @@ function testClient() {
   });
 }
 
+function testMatchAll() {
+  clients.matchAll({includeUncontrolled: true, type: 'all'}).then(function (result) {
+    debug('Clients found: ' + result.length);
+    for (var i = 0; i < result.length; i++) {
+      debug("Client Id: " + result[i].id);
+      debug("Client url: " + result[i].url);
+      debug("Client frameType: " + result[i].frameType);
+    }
+  }).catch(function (error) {
+    debug('Error calling matchAll');
+  });
+}
+
 self.onmessage = function(e) {
-  debug('Message received 8: ' + e.data);
+  debug('Message received 9: ' + e.data);
   switch (e.data) {
     case 'openWindow':
       testOpenWindow();
       break;
     case 'client':
       testClient();
+      break;
+    case 'matchAll':
+      testMatchAll();
       break;
     default:
       debug('Received unknown message');

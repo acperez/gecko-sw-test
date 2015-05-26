@@ -158,12 +158,20 @@ function debug_separator() {
     });
   });
 
-  // Open window action
+  // client action
   var client_btn = document.querySelector('#client_btn');
   client_btn.addEventListener('click', function(e) {
     debug_separator();
     debug('Send client message to worker');
     navigator.serviceWorker.controller.postMessage('client');
+  });
+
+  // matchAll action
+  var matchall_btn = document.querySelector('#matchall_btn');
+  matchall_btn.addEventListener('click', function(e) {
+    debug_separator();
+    debug('Send matchall message to worker');
+    navigator.serviceWorker.controller.postMessage('matchAll');
   });
 
   navigator.serviceWorker.onmessage = function(msg) {
