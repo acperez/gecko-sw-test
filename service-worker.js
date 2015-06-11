@@ -7,7 +7,7 @@ function debug(str) {
 
 self.addEventListener('install', function(e) {
   debug('Install event');
-  debug('Install version 14');
+  debug('Install version 15');
 });
 
 self.addEventListener('activate', function(e) {
@@ -78,7 +78,7 @@ function testMatchAll() {
 }
 
 self.onmessage = function(e) {
-  debug('Message received 14: ' + e.data);
+  debug('Message received 15: ' + e.data);
   switch (e.data) {
     case 'openWindow':
       testOpenWindow();
