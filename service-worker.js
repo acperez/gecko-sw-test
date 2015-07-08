@@ -1,5 +1,7 @@
 'use strict';
 
+var version = 29;
+
 function debug(str) {
   dump(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
   console.log(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
@@ -7,7 +9,7 @@ function debug(str) {
 
 self.addEventListener('install', function(e) {
   debug('Install event');
-  debug('Install version 28');
+  debug('Install version ' + version);
 });
 
 self.addEventListener('activate', function(e) {
@@ -78,7 +80,7 @@ function testMatchAll() {
 }
 
 self.onmessage = function(e) {
-  debug('Message received 28: ' + e.data);
+  debug('Message received ' + version + ': ' + e.data);
   switch (e.data) {
     case 'openWindow':
       testOpenWindow();
