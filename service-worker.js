@@ -1,6 +1,6 @@
 'use strict';
 
-var version = 36;
+var version = 37;
 
 function debug(str) {
   dump(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
