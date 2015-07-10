@@ -1,6 +1,6 @@
 'use strict';
 
-var version = 37;
+var version = 39;
 
 function debug(str) {
   dump(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
@@ -19,16 +19,23 @@ self.addEventListener('activate', function(e) {
 var cli;
 
 self.addEventListener('fetch', function(e) {
-  debug('Fetch event');
-  var clients = this.clients;
-  cli = clients;
+  debug("Fetch event for asdasdasd");
+  debug('Fetch event for: ' + e.request.url);
+  debug("Fetch event for asdasdasd");
+//  event.respondWith(new Response("Hello world!"));
 
-  clients.claim().then(function(algo1, algo2) {
-    debug('algo1: ' + algo1);
-    debug('algo2: ' + algo2);
-  }).catch(function(error) {
-    debug('Error calling claim: ' + error);
-  });
+
+  debug("Fetch event for asdasdasd 1,5 " + document);
+  debug("Fetch event for asdasdasd 1,5 " + document.implementation);
+  var xmlDoc  = document.implementation.createDocument(null, null, null);
+  debug("Fetch event for asdasdasd 2");
+  debug(xmlDoc);
+  var result = xmlDoc.load('test.xml');
+//  var result = xmlDoc.load('http://www.w3schools.com/xml/note.xml');
+  debug("xmlDoc.load result sw: " + result);
+
+
+
 });
 
 function testOpenWindow() {
