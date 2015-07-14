@@ -1,6 +1,6 @@
 'use strict';
 
-var version = 40;
+var version = 41;
 
 function debug(str) {
   dump(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
@@ -21,7 +21,7 @@ var cli;
 self.addEventListener('fetch', function(event) {
   debug("Fetch event for asdasdasd");
   debug('Fetch event for: ' + event.request.url);
-  if (event.request.url.contains('test.xml')) {
+  if (event.request.url.contains('test.xmll')) {
     debug("Fetch event for asdasdasdi intercept");
 /*
     event.respondWith(fetch('http://www.w3schools.com/xml/note.xml').then(function(response) {
@@ -29,6 +29,19 @@ self.addEventListener('fetch', function(event) {
       return response;
     })); // PARSE ERROR
 */
+
+    event.respondWith(
+      fetch('http://www.w3schools.com/xml/note.xml').then(function(response) {
+        debug("Fetch response: " + response.status);
+        debug("Fetch response ok?: " + response.ok);
+        return response;
+      })
+      .catch(function(error) {
+        debug('There has been a problem with your fetch operation: ' + error.message);
+      })
+    ); // PARSE ERROR
+
+/*
     event.respondWith(
       fetch('http://www.w3schools.com/xml/note.xml', {mode: 'no-cors'}).then(function(response) {
         debug("Fetch response: " + response.status);
@@ -39,7 +52,7 @@ self.addEventListener('fetch', function(event) {
         debug('There has been a problem with your fetch operation: ' + error.message);
       })
     ); // OK
-
+*/
     //event.respondWith(fetch('http://www.w3schools.com/xml/note.xml', {mode: 'no-cors'})); // OK
     //event.respondWith(fetch('http://www.w3schools.com/xml/note.xml', {mode: 'cors'})); // PARSE ERROR
     //event.respondWith(fetch('http://www.w3schools.com/xml/note.xml', {mode: 'same-origin'})); // PARSE ERROR
