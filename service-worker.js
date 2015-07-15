@@ -1,6 +1,6 @@
 'use strict';
 
-var version = 49;
+var version = 50;
 
 function debug(str) {
   dump(' -*- ServiceWorkers - Worker -*-: ' + str + '\n');
@@ -29,7 +29,7 @@ self.addEventListener('fetch', function(event) {
       return response;
     })); // PARSE ERROR
 */
-
+/*
     event.respondWith(
       fetch('http://www.w3schools.com/xml/note.xml').then(function(response) {
         debug("Fetch response: " + response.status);
@@ -40,8 +40,8 @@ self.addEventListener('fetch', function(event) {
         debug('There has been a problem with your fetch operation: ' + error.message);
       })
     ); // PARSE ERROR
+*/
 
-/*
     event.respondWith(
       fetch('http://www.w3schools.com/xml/note.xml', {mode: 'no-cors'}).then(function(response) {
         debug("Fetch response: " + response.status);
@@ -52,7 +52,7 @@ self.addEventListener('fetch', function(event) {
         debug('There has been a problem with your fetch operation: ' + error.message);
       })
     ); // OK
-*/
+
     //event.respondWith(fetch('http://www.w3schools.com/xml/note.xml', {mode: 'no-cors'})); // OK
     //event.respondWith(fetch('http://www.w3schools.com/xml/note.xml', {mode: 'cors'})); // PARSE ERROR
     //event.respondWith(fetch('http://www.w3schools.com/xml/note.xml', {mode: 'same-origin'})); // PARSE ERROR
